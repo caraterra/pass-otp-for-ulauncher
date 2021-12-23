@@ -1,0 +1,51 @@
+{
+  "required_api_version": "^2.0.0",
+  "name": "Pass OTP for Ulauncher",
+  "description": "A Ulauncher extension for pass-otp.",
+  "developer_name": "Alexander Carter",
+  "icon": "images/application-pgp-encrypted-alt.svg",
+  "options": {
+    "query_debounce": 0.1
+  },
+  "preferences": [
+    {
+      "id": "keyword-otp",
+      "type": "keyword",
+      "name": "otp",
+      "description": "Copy one-time-passwords to the clipboard.",
+      "default_value": "otp"
+    },
+    {
+      "id": "keyword-otp-qr",
+      "type": "keyword",
+      "name": "otpq",
+      "description": "Generate a QR code for this OTP token.",
+      "default_value": "otpq"
+    },
+    {
+      "id": "show_regex",
+      "type": "input",
+      "name": "Exclude files",
+      "description": "Only show password files matching this regular expression",
+      "default_value": ".*"
+    },
+    {
+      "id": "max_display_lines",
+      "type": "input",
+      "name": "Maximum lines to dispaly",
+      "description": "The maximum number of lines to display at once",
+      "default_value": "8"
+    },
+    {
+      "id": "show_notification",
+      "type": "select",
+      "name": "Notificaitons",
+      "description": "Whether or not to show a notification when a password has been copied",
+      "default_value": "yes",
+      "options": [
+        "yes",
+        "no"
+      ]
+    }
+  ]
+}
