@@ -1,10 +1,9 @@
 """Used for getting the user's PASSWORD_STORE_DIR env var"""
 from os import getenv, system
 from pathlib import Path
-import qrcode
 import re
 import subprocess
-from gi.repository import Notify, GdkPixbuf
+from gi.repository import Notify
 from ulauncher.api.client.Extension import Extension
 from ulauncher.api.client.EventListener import EventListener
 from ulauncher.api.shared.event import KeywordQueryEvent, ItemEnterEvent
@@ -15,8 +14,6 @@ from ulauncher.api.shared.action.RenderResultListAction import RenderResultListA
 from ulauncher.api.shared.action.ExtensionCustomAction import ExtensionCustomAction
 
 prefix = ""
-
-# NOTE: The program 'qrencode' or some python module will be required to generate QR codes
 
 
 def sort_by_basename(fname):
@@ -38,6 +35,7 @@ class KeywordQueryEventListener(EventListener):
 
     def on_event(self, event, extension):
         keyword = event.get_keyword()
+
         search_str = event.get_argument()
         if search_str:
             password_files = sorted(
@@ -84,9 +82,7 @@ class ItemEnterEventListener(EventListener):
                     "object-unlocked",
                 ).show()
         elif keyword == extension.preferences["keyword-otp-qr"]:
-            pass_name = event.get_data()["password_file"].stem
-            token = subprocess.check_output(["pass", "show", pass_arg])
-            qrcode.make(token).show()
+            subprocess.call(["pass", "show", "-q", pass_arg])
         else:
             raise RuntimeError(f"An invalid keyword, '{keyword}', was passed")
 
