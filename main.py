@@ -73,8 +73,7 @@ class ItemEnterEventListener(EventListener):
             ".gpg", ""
         )
         if keyword == extension.preferences["keyword-otp"]:
-            pass_cmd = f"pass otp -c {pass_arg} > /dev/null".format(pass_arg)
-            system(pass_cmd)
+            subprocess.call(["pass", "otp", "-c", pass_arg])
             if extension.preferences["show_notification"] == "yes":
                 Notify.Notification.new(
                     f"Copied {pass_arg} to clipboard.",
