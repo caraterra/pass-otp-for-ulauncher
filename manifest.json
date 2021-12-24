@@ -3,7 +3,7 @@
   "name": "Pass OTP for Ulauncher",
   "description": "A Ulauncher extension for pass-otp.",
   "developer_name": "Alexander Carter",
-  "icon": "images/application-pgp-encrypted-alt.svg",
+  "icon": "images/file-qr.svg",
   "options": {
     "query_debounce": 0.1
   },
