@@ -10,6 +10,11 @@ A Ulauncher wrapper around [pass-otp](https://github.com/tadfisher/pass-otp).
 
 ![screenshot](images/pass-otp-for-ulauncher-qr.png)
 
+## Features
+
+- Copy one-time-passwords to the clipboardd
+- Display one-time-password tokens as a QR code
+
 ## Dependencies
 
 - [qrencode](https://fukuchi.org/works/qrencode/) to display QR codes. This program can likely be found in your package repositories
