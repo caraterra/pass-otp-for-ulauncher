@@ -50,7 +50,7 @@ class KeywordQueryEventListener(EventListener):
             if re.search(show_pattern, pfile.stem):
                 items.append(
                     ExtensionResultItem(
-                        icon="images/application-pgp-encrypted-alt.svg",
+                        icon="images/file-qr.svg",
                         name=f"{pfile.stem}",
                         description=f"{pfile}".replace(str(Path.home()), "~"),
                         on_enter=ExtensionCustomAction(
