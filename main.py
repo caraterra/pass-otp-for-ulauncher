@@ -16,11 +16,6 @@ from ulauncher.api.shared.action.ExtensionCustomAction import ExtensionCustomAct
 prefix = ""
 
 
-def sort_by_basename(fname):
-    """Takes Path objects, and returns their name so they may be sorted by list()"""
-    return fname.name
-
-
 class PassExtension(Extension):
     """Initializes the extension"""
 
@@ -39,10 +34,12 @@ class KeywordQueryEventListener(EventListener):
         search_str = event.get_argument()
         if search_str:
             password_files = sorted(
-                list(prefix.rglob(f"*{search_str}*.gpg")), key=sort_by_basename
+                list(prefix.rglob(f"*{search_str}*.gpg")), key=lambda fname: fname.name
             )
         else:
-            password_files = sorted(list(prefix.rglob("*.gpg")), key=sort_by_basename)
+            password_files = sorted(
+                list(prefix.rglob("*.gpg")), key=lambda fname: fname.name
+            )
 
         items = []
         show_pattern = re.compile(extension.preferences["show_regex"])
@@ -74,6 +71,7 @@ class ItemEnterEventListener(EventListener):
         )
         if keyword == extension.preferences["keyword-otp"]:
             with subprocess.Popen(["pass", "otp", "-c", pass_arg]) as process:
+                process.wait()
                 if (
                     extension.preferences["show_notification"] == "yes"
                     and process.returncode == 0
