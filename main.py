@@ -73,13 +73,16 @@ class ItemEnterEventListener(EventListener):
             ".gpg", ""
         )
         if keyword == extension.preferences["keyword-otp"]:
-            subprocess.call(["pass", "otp", "-c", pass_arg])
-            if extension.preferences["show_notification"] == "yes":
-                Notify.Notification.new(
-                    f"Copied {pass_arg} to clipboard.",
-                    "Will clear in 45 seconds.",
-                    "object-unlocked",
-                ).show()
+            with subprocess.Popen(["pass", "otp", "-c", pass_arg]) as process:
+                if (
+                    extension.preferences["show_notification"] == "yes"
+                    and process.returncode == 0
+                ):
+                    Notify.Notification.new(
+                        f"Copied {pass_arg} to clipboard.",
+                        "Will clear in 45 seconds.",
+                        "object-unlocked",
+                    ).show()
         elif keyword == extension.preferences["keyword-otp-qr"]:
             subprocess.call(["pass", "show", "-q", pass_arg])
         else:
