@@ -79,7 +79,7 @@ class ItemEnterEventListener(EventListener):
                     Notify.Notification.new(
                         f"Copied {pass_arg} to clipboard.",
                         "Will clear in 45 seconds.",
-                        "object-unlocked",
+                        "dialog-information",
                     ).show()
         elif keyword == extension.preferences["keyword-otp-qr"]:
             subprocess.call(["pass", "show", "-q", pass_arg])
